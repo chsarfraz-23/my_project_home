@@ -1,9 +1,5 @@
 from django.contrib import admin
 
-from new.models import NewModel, MyModel, Sarfraz
+from new.models import KollaTesting
 
-# Register your models here.
-
-admin.site.register(NewModel)
-admin.site.register(MyModel)
-admin.site.register(Sarfraz)
+admin.site.register(KollaTesting)

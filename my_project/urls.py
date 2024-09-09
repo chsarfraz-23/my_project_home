@@ -52,7 +52,8 @@ urlpatterns = [
     path('verify_token/', TokenVerifyView.as_view(), name='token_verify'),
     path('', include(debug_toolbar.urls)),
     re_path(r'^auth/', include('rest_framework_social_oauth2.urls', namespace="drf")),
-    path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui')
+    path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('new/', include("new.urls"))
               ] + router.urls
 
 

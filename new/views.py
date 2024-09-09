@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from new.models import KollaTesting
+from new.serializers import KollaSerializer
+
+
+class KollaView(viewsets.ModelViewSet):
+    serializer_class = KollaSerializer
+    queryset = KollaTesting.objects.all()
+

@@ -1,9 +1,7 @@
 from django.db.models import Prefetch
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
-from myapp import enum
 from myapp.models import School, Universty, College, AffiliateColleges, Industries, Departments, Fee, UserProfile
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
@@ -15,8 +13,6 @@ from myapp.serializer import (SchoolSerializer, CollegeSerializer, UniverstySeri
                               UniverstyNestedSerializer, DepartmentSerializer, FeeSerializer, DepartmentNestedSerializer
                               )
 from django.contrib.auth.models import Permission
-from rest_framework_simplejwt.authentication import JWTAuthentication
-from myapp.utils import validate_permission, user_in_group
 
 
 class LargeResultsSetPagination(PageNumberPagination):
@@ -42,14 +38,12 @@ class IndustriesView(viewsets.ModelViewSet):
 class UniverstyNestedView(viewsets.ModelViewSet):
     queryset = Universty.objects.all()
     serializer_class = UniverstyNestedSerializer
-    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
 
 class AffiliationView(viewsets.ModelViewSet):
     queryset = AffiliateColleges.objects.all()
     serializer_class = Affiliate
-    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
 
@@ -81,68 +75,57 @@ class SchoolView(viewsets.ModelViewSet):
 class CollegeView(viewsets.ModelViewSet):
     queryset = College.objects.all()
     serializer_class = CollegeSerializer
-    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
 
 class UniverstyView(viewsets.ModelViewSet):
     queryset = Universty.objects.select_related('user').all()
     serializer_class = UniverstySerializer
-    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
 
 class GetDataS(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = DataByStringSerializer
-    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
 
 class GetDataH(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = DataByHyperLinkSerializer
-    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
 
 class GetDataHI(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = DataByHyperLinkIdentity
-    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
 
 class GetDataP(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = DataByPrimaryKeyRelated
-    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
 
 class GetDataSlug(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = DataBySlugRelated
-    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
 
 class DepartmentView(viewsets.ModelViewSet):
     queryset = Departments.objects.all()
     serializer_class = DepartmentSerializer
-    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
 
 class DepartmentNestedView(viewsets.ModelViewSet):
     queryset = Departments.objects.all()
     serializer_class = DepartmentNestedSerializer
-    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
 
 class FeeView(viewsets.ModelViewSet):
     queryset = Fee.objects.all()
     serializer_class = FeeSerializer
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]

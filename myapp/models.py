@@ -2,15 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 import uuid
 
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-
 
 class UserProfile(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
-    phone_number = models.CharField(max_length=12, unique=True, auto_created=False, null=True)
-    id_card_number = models.CharField(max_length=13, unique=True, blank=True, auto_created=False)
-    bank_account_number = models.CharField(max_length=30, unique=True, null=True, blank=True)
+    phone_number = models.CharField(max_length=12, auto_created=False, null=True,)
+    id_card_number = models.CharField(max_length=13, blank=True, auto_created=False, null=True)
+    bank_account_number = models.CharField(max_length=30, null=True, blank=True)
 
 
 class Universty(models.Model):
